@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Parallax</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@100&display=swap');
+        *
+        {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Urbanist', sans-serif;
+            font-weight: 600;
+            outline: none;
+            text-decoration: none;
+        }
+        body
+        {
+            /*background: linear-gradient(to top,#222 40%, #fff);*/
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        header
+        {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 100px;
+            z-index: 1000;
+            background: linear-gradient(#ffff 50%, #fff0);
+        }
+        header h2 a
+        {
+            color: #3478a6;
+            font-weight: 800;
+            font-size: 1.3em;
+        }
+        header ul
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        header ul li
+        {
+            list-style: none;
+        }
+        header ul li a
+        {
+            color: #3478a6;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin: 5px;
+        }
+        header ul li a:hover,
+        header ul li a.active
+        {
+            background: #3478a6;
+            color: #fff;
+        }
+        section
+        {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* -------------BTN BACK RGB--------------- */
+        .btn
+        {
+            width: 300px;
+            height: 100px;
+            padding: 10px;
+            margin: 5px;
+            transform: translateY(200px);
+        }
+        .btn span
+        {
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            color: #4fabe8;
+            letter-spacing: 0.3rem;
+        }
+        .btn:before,
+        .btn:after
+        {
+            content:'';
+            position: absolute;
+            transition: .5s;
+            inset: 1;
+            border-radius: 10px;
+            filter: blur(5px);
+        }
+        #btn:before,
+        #btn:after
+        {
+            background: linear-gradient(var(--deg), blue, transparent, transparent, yellow);
+        }
+        #btn2:before,
+        #btn2:after
+        {
+            background: linear-gradient(var(--deg), red, transparent, transparent, green);
+        }
+        .btn:hover:before,
+        {
+            inset: -8px;
+        }
+        .btn:hover:after
+        {
+            inset: -3px;
+        }
+        
+        /* --------------LINE BOTTOM----------- */
+        .btn2
+        {
+            width: 200px;
+            height: 50px;
+            padding: 10px;
+            margin: 5px;
+            transform: translateY(200px);
+        }
+        .btn2 span
+        {
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            background: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #fff;
+            letter-spacing: 8px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .btn2:before
+        {
+            content: '';
+            position: absolute;
+            inset: 1;
+            z-index: 1000;
+            height: 2px;
+            width: var(--width-before);
+            border-radius: 2px;
+        }
+        .btn2:after
+        {
+            content: '';
+            position: absolute;
+            inset: 1;
+            z-index: 1000;
+            height: 2px;
+            width: var(--width-after);
+            border-radius: 2px;
+            margin-right: 0;
+        }
+        .btn2:hover:before
+        {
+            background: #4fabe8;
+        }
+        .btn2:hover:after
+        {
+            background: orange;
+        }
+        .btn2:hover:before,
+        .btn2:hover:after
+        {
+            inset: -3px;
+            top: var(--btn2H);
+        }
+        
+        /* --------------DIV LOREM-------------- */
+        .text-div
+        {
+            margin-top: 50vh;
+            /*background: linear-gradient(transparent 50%,#2223);*/
+            width: 90%;
+            margin: auto;
+            transition: 1s;
+        }
+        .text-div p
+        {
+            font-weight: 100;
+        }
+        #sec1
+        {
+            opacity: 0;
+        }
+        #sec2
+        {
+            transform: translateX(-110%);
+        }
+        #sec3
+        {
+            transform: translateX(110%);
+        }
+    </style>
+</head>
+<body>
+    <header id='header'>
+        <h2><a href='#'>Parallax site</a></h2>
+        <ul>
+            <li><a href='#' class='active'>Home</a></li>
+            <li><a href='#'>About</a></li>
+            <li><a href='#'>Contact</a></li>
+            <li><a href='#'>Other things</a></li>
+        </ul>
+    </header>
+    <section>
+        <a class='btn' href='#' id='btn'><span>My parallax site.</span></a>
+        <a class='btn' href='#' id='btn2'><span>It's coooool</span></a>
+    </section>
+    <section>
+        <a class='btn2' href='#' id='btn3' onmouseover='lineBot()'><span>Line</span></a>
+        <a class='btn2' href='#' id='btn4' onmouseover='lineBot()'><span>Line 2</span></a>
+    </section>
+    <div id='sec1' class='text-div'>
+        <h1>Parallax lol</h1>
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br><br>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br><br>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br><br></p>
+    </div>
+    <div id='sec2' class='text-div'>
+        <h1>Parallax lol</h1>
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br><br>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br><br>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br><br></p>
+    </div>
+    <div id='sec3' class='text-div'>
+        <h1>Parallax lol</h1>
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br><br>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br><br>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."<br><br></p>
+    </div>
+
+<script>
+     document.body.style.setProperty('--btn2H', parseInt(window.getComputedStyle(document.querySelector('.btn2')).height) + 'px');
+
+    d = 0;
+    setInterval(function(){
+        document.body.style.setProperty('--deg', d + 'deg');
+        d++;
+    }, 50);
+    
+    function lineBot(){
+        document.body.style.setProperty('--width-before', '0%');
+        document.body.style.setProperty('--width-after', '0%');
+        i = 0;
+        var time = 2;
+        for(i = 0; i <= 100; i++){
+            (function(i){
+                setTimeout(function(){
+                    document.body.style.setProperty('--width-before', i + '%');
+                    if(i >= 99){
+                        document.body.style.setProperty('--width-before', '0%');
+                        lineBot2();
+                    }
+                }, time * i)
+            }) (i);
+        }
+    }
+    function lineBot2(){
+        document.body.style.setProperty('--width-after', '100%');
+        i2 = 0;
+        var time2 = 2;
+        for(i2 = 0; i2 <= 100; i2++){
+            (function(i2){
+                setTimeout(function(){
+                    i3 = 100 - i2;
+                    document.body.style.setProperty('--width-after', i3 + '%');
+                }, time2 * i2)
+            }) (i2);
+        }
+    }
+
+    bodyH = parseInt(window.getComputedStyle(document.body).height);
+    btn = document.getElementById('btn');
+    btn2 = document.getElementById('btn2');
+    sec1 = document.getElementById('sec1');
+    sec2 = document.getElementById('sec2');
+    sec3 = document.getElementById('sec3');
+    header = document.getElementById('header');
+    
+    let sec1T = sec1.offsetTop;
+    let sec2T = sec2.offsetTop;
+    let sec3T = sec3.offsetTop;
+    let sec1H = parseInt(window.getComputedStyle(sec1).height);
+    let sec2H = parseInt(window.getComputedStyle(sec2).height);
+    let sec3H = parseInt(window.getComputedStyle(sec3).height);
+    let realSec1T = sec1T - (sec1H / 0.5);
+    let realSec2T = sec2T - (sec2H / 0.5);
+    let realSec3T = sec3T - (sec3H / 0.5);
+    
+    window.addEventListener('scroll', function(){
+        let valuey = window.scrollY;
+        
+        btn.style.marginTop = valuey * -1.2 + 'px';
+        btn.style.marginRight = valuey * 0.8 + 'px';
+        btn2.style.marginTop = valuey * -1.2 + 'px';
+        btn2.style.marginLeft = valuey * 0.8 + 'px';
+        v = 255 - (valuey / 3);
+        if(v < 34){
+            v = 34;
+        }
+        v2 = valuey / 3;
+        if(v2 > 120){
+            v2 = 255;
+        } else {
+            v2 = 0;
+        }
+        document.body.style.background = `rgb(${v},${v},${v})`;
+        for(i = 0; i < document.querySelectorAll('.text-div').length; i++){
+            document.querySelectorAll('.text-div')[i].style.color = `rgb(${v2},${v2},${v2})`;
+        }
+        
+        header.style.top = valuey + 'px';
+        if(valuey > realSec1T){
+            sec1.style.opacity = 9;
+        }
+        if(valuey > realSec2T){
+            sec2.style.transform = 'translateX(0)';
+        }
+        if(valuey > realSec3T){
+            sec3.style.transform = 'translateX(0)';
+        }
+    })
+    
+</script>
+</body>
+</html>
